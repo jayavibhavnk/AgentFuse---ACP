@@ -1,7 +1,7 @@
 {
   "name": "agentfuse",
   "version": "0.1.0",
-  "description": "Fuse any Node or TypeScript app with coding agent CLIs — Claude, Cursor, Codex, OpenCode, OpenClaw, Hermes, and more.",
+  "description": "Fuse any Node or TypeScript app with coding agent CLIs \u2014 Claude, Cursor, Codex, OpenCode, OpenClaw, Hermes, and more.",
   "type": "module",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -15,7 +15,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
@@ -27,5 +29,15 @@
     "typescript": "^5.7.0",
     "vitest": "^2.1.0"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_ORG/agentfuse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_ORG/agentfuse/issues"
+  },
+  "homepage": "https://github.com/YOUR_ORG/agentfuse#readme"
 }

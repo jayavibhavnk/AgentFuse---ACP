@@ -1,8 +1,21 @@
 # Agentfuse
 
-**Fuse any Node.js or TypeScript app with coding agent CLIs** — one interface for [Claude Code](https://github.com/anthropics/claude-code), Cursor (`agent`), Codex, OpenCode, OpenClaw, Hermes (ACP), and more.
+**One TypeScript library to drive coding-agent CLIs** — spawn, stream, and normalize output from [Claude Code](https://github.com/anthropics/claude-code), Cursor (`agent`), Codex, OpenCode, OpenClaw, Hermes (ACP), and more.
 
-Inspired by the agent abstraction in [Multica](https://github.com/multica-ai/multica) (`server/pkg/agent`). This package is **standalone**: no Multica runtime required.
+Agentfuse is **its own open-source project**. It is **not** part of [Multica](https://github.com/multica-ai/multica) and does not require Multica. The API is *inspired by* the same “unified backend” idea used in many codebases, but this package is standalone and published separately.
+
+---
+
+## Why Agentfuse
+
+- **Embed in any Node or TypeScript app** — task runners, IDEs, CI, internal tools.
+- **One shape for messages and results** — `Message` stream + final `Result` (status, output, usage).
+- **Discover what’s installed** — `detectAll()` uses your `PATH` and `--version`.
+- **CLI for smoke tests** — `agentfuse detect` and `agentfuse run` without writing code.
+
+Upstream CLIs are **separate installs** with their own terms and licenses. Agentfuse only orchestrates processes you already have.
+
+---
 
 ## Install
 
@@ -10,48 +23,90 @@ Inspired by the agent abstraction in [Multica](https://github.com/multica-ai/mul
 npm install agentfuse
 ```
 
-From a checkout: `npm install && npm run build`, then `node examples/run-once.ts` (Node 22+ with `--experimental-strip-types`) or run the compiled `dist` entry via the imports shown in `examples/run-once.ts`.
+**From a git clone** (contributors):
 
-## Library
+```bash
+git clone https://github.com/YOUR_ORG/agentfuse.git
+cd agentfuse
+npm install
+npm run build
+npm test
+```
+
+Replace `YOUR_ORG` with your GitHub org or username when you publish the repo.
+
+---
+
+## Quick start (library)
 
 ```typescript
 import { createBackend, detectAll } from "agentfuse";
 
-const installed = await detectAll();
+const available = await detectAll();
+console.log("On PATH:", available.map((d) => d.providerId).join(", "));
+
 const backend = createBackend("claude", {});
-const { messages, result } = backend.execute("Fix the typo in README", {
-  cwd: "/path/to/repo",
+const { messages, result } = backend.execute("Summarize the src folder in one sentence.", {
+  cwd: "/path/to/your/repo",
 });
 
 for await (const m of messages) {
-  console.log(m.type, m.content);
+  if (m.type === "text") console.log(m.content);
 }
-console.log(await result);
+
+const final = await result;
+console.log(final.status, final.output.slice(0, 200));
 ```
+
+---
 
 ## CLI
 
 ```bash
-# List CLIs on your PATH
+# What’s installed?
 npx agentfuse detect
+npx agentfuse detect --json
 
-# Run a single prompt (streams text to stdout)
-npx agentfuse run --provider claude "Explain what Agentfuse does in one sentence."
+# One-shot prompt (text streams to stdout)
+npx agentfuse run --provider claude "Say hello in exactly three words."
+npx agentfuse run --provider cursor --cwd . "List files in the current directory."
 ```
+
+---
 
 ## Providers
 
-| ID | Default binary | Notes |
-|----|----------------|--------|
+| ID | Default binary | Transport |
+|----|----------------|-------------|
 | `claude` | `claude` | Stream JSON |
-| `cursor` | `agent` | Cursor headless CLI |
-| `codex` | `codex` | `app-server` JSON-RPC |
-| `opencode` | `opencode` | `run --format json` |
-| `openclaw` | `openclaw` | Parses JSON on stderr |
-| `hermes` | `hermes` | `acp` ACP JSON-RPC |
+| `cursor` | `agent` | Stream JSON |
+| `codex` | `codex` | JSON-RPC (`app-server`) |
+| `opencode` | `opencode` | JSON lines |
+| `openclaw` | `openclaw` | JSON on stderr |
+| `hermes` | `hermes` | ACP JSON-RPC |
 
-Upstream CLIs are separate installs with their own licenses.
+Override the binary with `BackendConfig.executablePath` when needed.
+
+---
+
+## Examples
+
+See **[examples/README.md](examples/README.md)** for runnable scripts (`detect`, streaming, custom binary path).
+
+---
+
+## Contributing
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+
+---
+
+## Security
+
+See **[SECURITY.md](SECURITY.md)** for reporting vulnerabilities.
+
+---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
