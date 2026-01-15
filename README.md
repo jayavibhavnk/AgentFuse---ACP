@@ -10,6 +10,10 @@ Inspired by the agent abstraction in [Multica](https://github.com/multica-ai/mul
 npm install agentfuse
 ```
 
+Build from source in this repo: `npm install && npm run build`.
+
+Run the sample (after build): `node examples/run-once.ts` requires Node 22+ with TypeScript support, or compile first — simplest: `npm run build && node --experimental-strip-types examples/run-once.ts` on Node 22+.
+
 ## Library
 
 ```typescript
