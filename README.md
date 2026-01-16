@@ -10,9 +10,7 @@ Inspired by the agent abstraction in [Multica](https://github.com/multica-ai/mul
 npm install agentfuse
 ```
 
-Build from source in this repo: `npm install && npm run build`.
-
-Run the sample (after build): `node examples/run-once.ts` requires Node 22+ with TypeScript support, or compile first — simplest: `npm run build && node --experimental-strip-types examples/run-once.ts` on Node 22+.
+From a checkout: `npm install && npm run build`, then `node examples/run-once.ts` (Node 22+ with `--experimental-strip-types`) or run the compiled `dist` entry via the imports shown in `examples/run-once.ts`.
 
 ## Library
 
@@ -23,7 +21,6 @@ const installed = await detectAll();
 const backend = createBackend("claude", {});
 const { messages, result } = backend.execute("Fix the typo in README", {
   cwd: "/path/to/repo",
-  model: optionalModel,
 });
 
 for await (const m of messages) {
