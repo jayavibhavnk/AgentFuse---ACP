@@ -2,7 +2,7 @@
 
 **One TypeScript library to drive coding-agent CLIs** — spawn, stream, and normalize output from [Claude Code](https://github.com/anthropics/claude-code), Cursor (`agent`), Codex, OpenCode, OpenClaw, Hermes (ACP), and more.
 
-Agentfuse is **its own open-source project**. It is **not** part of [Multica](https://github.com/multica-ai/multica) and does not require Multica. The API is *inspired by* the same “unified backend” idea used in many codebases, but this package is standalone and published separately.
+Agentfuse is **its own open-source project**. The API is *inspired by* the same “unified backend” idea used in many codebases, but this package is standalone and published separately.
 
 ---
 
