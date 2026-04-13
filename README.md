@@ -26,14 +26,12 @@ npm install agentfuse
 **From a git clone** (contributors):
 
 ```bash
-git clone https://github.com/YOUR_ORG/agentfuse.git
-cd agentfuse
+git clone https://github.com/jayavibhavnk/AgentFuse---ACP.git
+cd AgentFuse---ACP
 npm install
 npm run build
 npm test
 ```
-
-Replace `YOUR_ORG` with your GitHub org or username when you publish the repo.
 
 ---
 

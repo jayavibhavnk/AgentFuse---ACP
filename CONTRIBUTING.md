@@ -11,22 +11,17 @@ Thanks for helping improve Agentfuse. This repository is **independent** of Mult
 ## Development
 
 ```bash
-git clone https://github.com/YOUR_ORG/agentfuse.git
-cd agentfuse
+git clone https://github.com/jayavibhavnk/AgentFuse---ACP.git
+cd AgentFuse---ACP
 npm install
 npm run build
 npm run typecheck
 npm test
 ```
 
-Replace `YOUR_ORG` with the real GitHub org/username after the repo is published.
+## Forks
 
-## Before the first push
-
-1. Create the empty GitHub repository (no README/license if you want a clean history from this repo).
-2. Replace every `YOUR_ORG` in `package.json`, `README.md`, and `CONTRIBUTING.md` with your org or username.
-3. `git remote add origin https://github.com/<you>/agentfuse.git`
-4. `git push -u origin main`
+Canonical upstream: [jayavibhavnk/AgentFuse---ACP](https://github.com/jayavibhavnk/AgentFuse---ACP). If you publish a fork, update `repository`, `bugs`, and `homepage` in `package.json` to match your fork.
 
 ## Project layout
 
